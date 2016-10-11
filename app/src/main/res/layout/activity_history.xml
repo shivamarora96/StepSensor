@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/HistoryCoordinateview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/Historytoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    >
+
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:id="@+id/toolbar_title"
+                        android:textStyle="bold"
+                        android:paddingLeft="25dp"
+                        android:gravity="start|center_vertical"
+                        android:textColor="@android:color/white"
+                        android:text="        HISTORY "
+                        android:textSize="20dp"
+                        />
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:paddingRight="35dp"
+                        android:layout_height="match_parent"
+                        android:tint="#ffffff"
+                        android:src="@drawable/iconhistory"
+
+                        />
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <!--COntent Layout..........................................-->
+
+
+
+            <ListView
+                android:layout_margin="10dp"
+                android:dividerHeight="15dp"
+                app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+                android:id="@+id/HistoryListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
