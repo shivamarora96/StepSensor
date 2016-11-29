@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -11,6 +11,83 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<style name="AppFullscreen"  parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@android:color/black</item>
+    <item name="colorPrimaryDark">#00000f</item>
+    <item name="colorAccent">@android:color/transparent</item>
+</style>
+    <!--//Collapsing TOolbar Theme Text Properties-->
+    <style name="changeingCollapsingTextSize"  app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title">
+        <item name="android:textColor" >#ffffff</item>
+        <item name="android:textSize">20dp</item>
+
+    </style>
+
+
+    <style name="FacebookLoginButton">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+
+
+    <style name="CustomText1" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomText2" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#FFFF00</item>
+    </style>
+
+    <style name="CustomText3" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="CustomShowcaseTheme" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#689F38</item>
+        <item name="sv_showcaseColor">#C6FF00</item>
+        <item name="sv_buttonText"> NEXT--> </item>
+        <item name="sv_tintButtonColor">false</item>
+        <item name="sv_titleTextAppearance">@style/CustomText2</item>
+    </style>
+
+    <style name="CustomShowcaseTheme2" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#880E4F</item>
+        <item name="sv_showcaseColor">#F8BBD0</item>
+        <item name="sv_buttonText"> NEXT--> </item>
+        <item name="sv_tintButtonColor">true</item>
+        <item name="sv_titleTextAppearance">@style/CustomText1</item>
+    </style>
+
+
+    <style name="CustomShowcaseTheme3" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#F44336</item>FF6F00
+        <item name="sv_showcaseColor">#F8BBD0</item>
+        <item name="sv_buttonText"> NEXT--> </item>
+        <item name="sv_tintButtonColor">false</item>
+        <item name="sv_titleTextAppearance">@style/CustomText3</item>
+    </style>
+
+    <style name="CustomShowcaseTheme4" parent="ShowcaseView">
+        <item name="sv_backgroundColor">#FF6F00</item>
+        <item name="sv_showcaseColor">#FFF59D</item>
+        <item name="sv_buttonText"> NEXT--> </item>
+        <item name="sv_tintButtonColor">false</item>
+        <item name="sv_titleTextAppearance">@style/CustomText3</item>
+    </style>
+
+
+
+
+
+
 
 </resources>
 

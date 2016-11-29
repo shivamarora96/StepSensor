@@ -4,6 +4,14 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+
+    <string name="facebook_app_id">199658273803724</string>
+    <string name="fb_login_protocol_scheme">fb199658273803724</string>
+
+
+
+    <!-- ADMOB-->
+    <string name="InterstetialAdunitId">ca-app-pub-7982678331425815/3361200686</string>
+    <string name="bannerAdunitId">ca-app-pub-7982678331425815/9407734282</string>
 </resources>

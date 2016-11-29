@@ -2,15 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <!--<item android:title=""  >-->
-        <!--<menu>-->
 
     <group android:checkableBehavior="single"
         android:id="@+id/section1">
-
-        <item android:id="@+id/homeB"
-              android:title="Home"
-              android:icon="@drawable/homeicon" />
 
 
         <item android:id="@+id/graph"
@@ -20,6 +14,11 @@
         <item android:id="@+id/history"
             android:title="History"
             android:icon="@drawable/iconhistory" />
+
+        <item android:id="@+id/gpswalk"
+            android:title="GPS walk"
+            android:icon="@android:drawable/ic_menu_compass" />
+
 
         <item android:id="@+id/notification"
             android:title="Notification"
@@ -35,17 +34,8 @@
 
 
         </group>
-       <!-- </menu>
-    </item>
--->
 
 
-
-<!--
-    <item android:title="" >
--->
-
-        <!--<menu>-->
         <group android:checkableBehavior="single"  android:id="@+id/section2" >
         <item android:id="@+id/share"
             android:title="Share With Friend"
@@ -56,16 +46,8 @@
             android:icon="@drawable/iconrate" />
 
     </group>
-<!--
-        </menu>
-    </item>
--->
 
 
-<!--
-    <item android:title="" >
-        <menu>
--->
     <group android:checkableBehavior="single"
         android:id="@+id/section3"
 
@@ -74,10 +56,6 @@
             android:title="Exit"
             android:icon="@drawable/iconexit" />
     </group>
-<!--
-        </menu>
 
-    </item>
--->
 
 </menu>

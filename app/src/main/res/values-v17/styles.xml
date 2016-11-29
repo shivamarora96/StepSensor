@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:app="http://schemas.android.com/tools">
+
+    <style name="changeingCollapsingTextSize" app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+</resources>
