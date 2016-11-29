@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v4.widget.DrawerLayout
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,7 +51,7 @@
                         android:textStyle="bold"
                         android:gravity="start|center_vertical"
                         android:textColor="@android:color/white"
-                        android:text="      STEP COUNTER "
+                        android:text="STEP SENSOR "
                         android:textSize="20dp"
                         />
 
@@ -67,20 +68,25 @@
 
 <!--COntent Layout..........................................-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+    android:background="@drawable/back"
+    android:orientation="vertical"
     >
+
 
     <com.skyfishjy.library.RippleBackground
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="5"
+    android:layout_weight="2.5"
     android:layout_gravity="center"
     android:id="@+id/rippleEffect"
     app:rb_color="#FF5252"
@@ -91,28 +97,31 @@
     app:rb_scale="6">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <TextView
             android:id="@+id/todayStep"
             android:layout_width="wrap_content"
             android:text="TODAY'S STEPS"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:textSize="19sp"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
             android:textColor="@android:color/holo_red_dark"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="6dp"
             />
      <ImageView
          android:layout_gravity="center"
-        android:layout_marginTop="19dp"
-        android:layout_width="225dp"
-        android:layout_height="225dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:minHeight="225dp"
+         android:minWidth="225dp"
         android:id="@+id/image_view"
         />
         </LinearLayout>
+
 </com.skyfishjy.library.RippleBackground>
 
 
@@ -120,134 +129,266 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:layout_margin="5dp"
+        android:layout_weight="1.5"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:orientation="horizontal">
 
 
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_weight="1"
-    android:padding="2dp"
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    card_view:cardCornerRadius="2dp"
-
-
-    >
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFE0B2"
-           >
-            <!--android:background="#81D4FA"-->
-
-
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text = "DISTANCE"
-                android:textColor="#D50000"
-                android:gravity="center_horizontal"
-                />
-            <TextView
-                android:id="@+id/distanceCovered"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:textSize="20dp"
-                android:textColor="#F44336"
-                android:textStyle="bold"
-                android:hint= "DISTANCE"
-                />
-
-        </LinearLayout>
-</android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:padding="2dp"
-            android:layout_weight="1.5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-
-           >
-        <LinearLayout
-            android:orientation="vertical"
-           android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFE0B2"
+            android:layout_weight="1"
             >
 
-            <TextView
-                android:textColor="#64DD17"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:text = "ACTIVE TIME"
-                android:gravity="center_horizontal"
-                />
-            <TextView
-                android:id="@+id/ActiveTime"
-                android:gravity="center"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:background="@android:color/transparent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:padding="2dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:text="DISTANCE (m)"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="@android:color/holo_red_dark"
+                            />
+                        <TextView
+
+                            android:id="@+id/distanceCovered"
+                            android:gravity="center"
+                            android:background="@color/colorPrimary"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="5"
+                            android:textSize="20dp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:hint= "DISTANCE"
+                            />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:hint= "ActiveTime"
-                android:textColor="#00C853"
-                />
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:padding="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:text="ACTIVE (mm::ss)"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="#880E4F"
+                            />
+
+                        <TextView
+                            android:id="@+id/ActiveTime"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="5"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:hint= "ActiveTime"
+                            android:background="#880E4F"
+                            android:textColor="#FFFFFF"
+                            />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
-</android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:padding="2dp">
+
+
+
 
         <LinearLayout
             android:orientation="vertical"
-           android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="#FFE0B2">
+            android:layout_weight="1"
+            >
 
-            <TextView
-                android:textColor="#FF6F00"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:text = "CALORIES"
-                android:gravity="center_horizontal"
-                />
-            <TextView
-                android:id="@+id/Calories"
-                android:gravity="center"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:padding="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:text="CALORIES (cal)"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="#880E4F"
+                            />
+                    <TextView
+                        android:id="@+id/Calories"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:hint= "Calories"
+                        android:background="#880E4F"
+                        android:textColor="#FFFFFF"
+                        />
+
+
+            </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:hint= "Calories"
-                android:textColor="#FF6F00"
-                />
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:padding="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:text="CURRENT STEPS"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="@android:color/holo_red_dark"
+                            />
+                        <TextView
+                            android:id="@+id/OneCurrentNoofSteps"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="5"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:hint= "Steps"
+                            android:background="@color/colorPrimary"
+                            android:textColor="#FFFFFF"
+                            />
+
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
 
         </LinearLayout>
-</android.support.v7.widget.CardView>
 
     </LinearLayout>
 
+    
+    <com.google.android.gms.ads.AdView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="3dp"
+        android:layout_weight="0.3"
+
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/bannerAdunitId"
+
+        >
+
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
+
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
 </android.support.design.widget.CoordinatorLayout>
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_exit"
+        icon="@drawable/iconexit"
+        title="Exit"
+        barColorWhenSelected="#abc569"
+        badgeBackgroundColor="#FF0000"
+       />
+    <tab
+        id="@+id/tab_hist"
+        icon="@drawable/iconhistory"
+        title="Hist"
+        barColorWhenSelected="#ddd100"
+       />
+    <tab
+        id="@+id/tab_share"
+        icon="@drawable/iconshare"
+        title="Share"
+        barColorWhenSelected="#a12668"
+       />
+
+
+</tabs>
