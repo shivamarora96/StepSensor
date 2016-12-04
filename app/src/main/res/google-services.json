@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "682556544785",
+    "project_id": "step-sensor"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682556544785:android:9948e3534f1c959e",
+        "android_client_info": {
+          "package_name": "com.example.shivamarora.stepsensor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682556544785-sp6vjn3rh9eo6n47mrb5p85p65f3on1c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shivamarora.stepsensor",
+            "certificate_hash": "8AEB0B42046989446661F4F0AAB71961A1D45C04"
+          }
+        },
+        {
+          "client_id": "682556544785-tb94pojloblgf63n9e9da7ccgfvqdkc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwEuif2bfJSZzbp3sP-ZuEaD5fCNuwMnU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
