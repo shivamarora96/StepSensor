@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.shivamarora.demoorangefirebase.OpenScreen"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
+
+
+        <TextView
+            android:layout_width="241dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="20dp"
+            android:text=" STEP  SENSOR"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:id="@+id/title"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:id="@+id/cartoonImageView"
+            android:layout_margin="25dp"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GET STARTED !!"
+            android:layout_margin="20dp"
+            android:id="@+id/OpenScreen_getstartedButton"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:background="#C6FF00"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_horizontal" />
+
+
+        <TextView
+
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="  Terms And Conditions !!! "
+            android:id="@+id/termsandconditions"
+            android:textColor="#ffffff"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:src="@drawable/footprint"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:tint="#ffffff"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="--->> SHIVAM ARORA "
+            android:textColor="#ffffff"
+            android:gravity="end"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            />
+
+
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
