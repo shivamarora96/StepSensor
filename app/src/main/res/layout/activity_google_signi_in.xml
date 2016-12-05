@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.example.shivamarora.demoorangefirebase.OpenScreen"
+            android:background="@color/colorPrimary"
+            android:weightSum="1">
+
+
+            <TextView
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginTop="20dp"
+                android:text=" STEP  SENSOR"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:id="@+id/title"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:id="@+id/cartoonImageView"
+                android:layout_margin="25dp"
+                android:src="@drawable/ic_launcher" />
+
+            <com.google.android.gms.common.SignInButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:id="@+id/GoogleSignIn_Button"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_gravity="center_horizontal" />
+
+            <com.google.android.gms.ads.AdView
+                android:layout_marginTop="5dp"
+                android:id="@+id/GoogleSignIn_BannerAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/bannerAdunitId" />
+
+            <TextView
+
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="  SKIP FOR NOW !!! "
+                android:id="@+id/GoogleSignIn_SkipForNow"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_horizontal" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--->> SHIVAM ARORA "
+                android:textColor="#ffffff"
+                android:gravity="end"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="10dp"
+                />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
