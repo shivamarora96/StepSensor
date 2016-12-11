@@ -6,13 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.example.shivamarora.stepsensor;
+package com.example.shivamarora.stepsensor.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.shivamarora.stepsensor.R;
 
 import org.eazegraph.lib.charts.ValueLineChart;
 import org.eazegraph.lib.models.ValueLinePoint;
@@ -24,10 +26,10 @@ import java.util.Calendar;
 public class DistanceGraphFragment extends android.support.v4.app.Fragment {
 
 
-    static String mDistAverage = "0" ;
-    static String mDistTotal= "0" ;
+    public static String mDistAverage = "0" ;
+    public static String mDistTotal= "0" ;
     Calendar c = Calendar.getInstance() ;
-    static ArrayList<Integer> StepCountInaWeek ;
+    public static ArrayList<Integer> StepCountInaWeek ;
 
 
 

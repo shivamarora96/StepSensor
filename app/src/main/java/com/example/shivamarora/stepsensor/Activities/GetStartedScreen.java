@@ -1,4 +1,12 @@
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package com.example.shivamarora.stepsensor.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +17,8 @@ import android.widget.Button;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
+import com.example.shivamarora.stepsensor.Database_Models.DbData;
+import com.example.shivamarora.stepsensor.R;
 //
 //import com.facebook.AccessToken;
 //import com.facebook.CallbackManager;
@@ -150,7 +160,7 @@ getStarted = (Button)findViewById(R.id.OpenScreen_getstartedButton);
     void DelayInStarting(int delay){
 
         Intent [] intent = new Intent[1] ;
-        intent[0] = new Intent(this , One.class) ;
+        intent[0] = new Intent(this , Main.class) ;
         PendingIntent pendingIntent  = PendingIntent.getActivities(GetStartedScreen.this , 0 , intent , 0) ;
         overridePendingTransition(android.R.anim.overshoot_interpolator , android.R.anim.overshoot_interpolator);
 

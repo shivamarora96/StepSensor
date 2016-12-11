@@ -6,13 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.example.shivamarora.stepsensor;
+package com.example.shivamarora.stepsensor.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.shivamarora.stepsensor.R;
 
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.models.BarModel;
@@ -22,10 +24,10 @@ import java.util.Calendar;
 
 public class StepsGraphFragment extends android.support.v4.app.Fragment {
 
-    static  String mStepsAverage = "0" ;
-    static  String mStepsTotal = "0" ;
+    public static  String mStepsAverage = "0" ;
+    public static  String mStepsTotal = "0" ;
      Calendar calendar = Calendar.getInstance() ;
-    static ArrayList<Integer> StepCountInaWeek ;
+    public static ArrayList<Integer> StepCountInaWeek ;
 
     public StepsGraphFragment() {
 
@@ -61,7 +63,7 @@ public class StepsGraphFragment extends android.support.v4.app.Fragment {
 
 
 
-   static String returnDayOfWeekInString(Calendar c){
+   public static String returnDayOfWeekInString(Calendar c){
 
         int calenderWeekEncoding = c.get(Calendar.DAY_OF_WEEK) ;
 

@@ -1,4 +1,12 @@
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package com.example.shivamarora.stepsensor.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +21,8 @@ import android.widget.ImageButton;
 //import com.facebook.FacebookSdk;
 //import com.facebook.appevents.AppEventsLogger;
 import com.bumptech.glide.Glide;
+import com.example.shivamarora.stepsensor.Others.Constant;
+import com.example.shivamarora.stepsensor.R;
 import com.pkmmte.view.CircularImageView;
 
 public class Me extends AppCompatActivity {

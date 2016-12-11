@@ -1,32 +1,29 @@
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package com.example.shivamarora.stepsensor.Activities;
 
 
-import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.support.v4.app.Fragment;
+
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
-
-import org.eazegraph.lib.charts.BarChart;
-import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.BarModel;
-import org.eazegraph.lib.models.PieModel;
-import org.eazegraph.lib.models.ValueLinePoint;
-import org.eazegraph.lib.models.ValueLineSeries;
+import com.example.shivamarora.stepsensor.Adapters_Customs.Graphical_Adapter;
+import com.example.shivamarora.stepsensor.Database_Models.DbData;
+import com.example.shivamarora.stepsensor.Fragments.CaloriesGraphFragment;
+import com.example.shivamarora.stepsensor.Fragments.DistanceGraphFragment;
+import com.example.shivamarora.stepsensor.Fragments.StepsGraphFragment;
+import com.example.shivamarora.stepsensor.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,7 +36,7 @@ public class GraphicalAnalysis extends AppCompatActivity {
 
     private TabLayout mGraphical_tabLayout ;
     private ViewPager mGraphical_viewPager ;
-    private CustomTabAdapter mGraphical_Adapter ;
+    private Graphical_Adapter mGraphical_Adapter ;
 
     private  ArrayList<DbData> dbDataArrayList ;    //Take DbData from database and stores in ArrayList size = 8
     private Calendar calendar ;
@@ -69,7 +66,7 @@ public class GraphicalAnalysis extends AppCompatActivity {
 
         mGraphical_tabLayout = (TabLayout) findViewById(R.id.Graphical_tabLayout);
         mGraphical_viewPager = (ViewPager) findViewById(R.id.Graphical_ViewPager);
-        mGraphical_Adapter = new CustomTabAdapter(getSupportFragmentManager());
+        mGraphical_Adapter = new Graphical_Adapter(getSupportFragmentManager());
         calendar = Calendar.getInstance();
 
 mGraphical_viewPager.setOffscreenPageLimit(3);
@@ -108,6 +105,7 @@ mGraphical_viewPager.setOffscreenPageLimit(3);
         return true ;
     }
 
+    @SuppressWarnings("WrongConstant")
     @Override
     protected void onResume() {
         super.onResume();
@@ -192,48 +190,4 @@ mGraphical_viewPager.setOffscreenPageLimit(3);
 
 //Custum Adapter .................................................................................
 
-
-class CustomTabAdapter extends FragmentPagerAdapter{
-
-    private  final int tabCount = 3 ;
-    private final String[] tabTitle = {"DISTANCE" , "STEPS" , "CALORIES"} ;
-
-
-    public CustomTabAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
-    @Override
-    public android.support.v4.app.Fragment getItem(int position) {
-
-        if(position == 1)
-        return new StepsGraphFragment() ;
-
-        else if(position == 2)
-            return new CaloriesGraphFragment() ;
-
-        else
-            return new DistanceGraphFragment() ;
-
-    }
-
-
-    @Override
-    public int getCount() {
-        return  tabCount ;
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return tabTitle[position] ;
-    }
-}
-
-
-//StepsCount Fragment ....................................................
-
-
-//Distance Count Fragment ..............................................................................
-
-//Calories Count Fragment ............................................................................
 

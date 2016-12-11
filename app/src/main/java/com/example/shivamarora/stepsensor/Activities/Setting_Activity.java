@@ -1,12 +1,17 @@
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package com.example.shivamarora.stepsensor.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Message;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,17 +20,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
+import com.example.shivamarora.stepsensor.Adapters_Customs.Settings_Adapter;
+import com.example.shivamarora.stepsensor.Database_Models.DbGeneral;
+import com.example.shivamarora.stepsensor.Others.Constant;
+import com.example.shivamarora.stepsensor.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +40,7 @@ public class Setting_Activity extends AppCompatActivity {
     Toolbar settingsToolbar ;
     ListView listView ;
     int currentLoginstatus = Constant.GOOGLE_PLUS_LOGOUT ;
-    SettingAdapter adapter ;
+    Settings_Adapter adapter ;
     DbGeneral mDbGeneral ;
     int stepGoals ;
     int stepSizeIncm ;
@@ -97,7 +102,7 @@ public class Setting_Activity extends AppCompatActivity {
         settings.add( " Version ");
 
 
-        adapter = new SettingAdapter(Setting_Activity.this , settings);
+        adapter = new Settings_Adapter(Setting_Activity.this , settings);
         listView = (ListView)findViewById(R.id.Setting_ListView) ;
         listView.setAdapter(adapter);
 
@@ -354,59 +359,3 @@ public class Setting_Activity extends AppCompatActivity {
 }
 
 
-class SettingAdapter extends ArrayAdapter<String> {
-
-    Context context ;
-    ArrayList<String> arrayList ;
-
-    public SettingAdapter(Context context , ArrayList<String> arrayList) {
-        super(context, 0);
-        this.arrayList = arrayList ;
-        this.context = context ;
-
-    }
-
-
-    @Override
-    public int getCount() {
-        return arrayList.size() ;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-
-        View view = convertView ;
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.custom_child_setting_listview , parent , false) ;
-        }
-
-
-        TextView textView = (TextView)view.findViewById(R.id.Setting_child_ListView_TextView) ;
-        textView.setText(arrayList.get(position));
-
-
-        return  view ;
-
-
-    }
-
-
-
-
-    @Override
-    public String getItem(int position) {
-        return arrayList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        long itemId = position*100 + 100 ;
-        return itemId ;
-    }
-
-
-
-
-
-}

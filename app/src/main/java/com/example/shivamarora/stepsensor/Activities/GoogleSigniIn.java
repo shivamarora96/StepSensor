@@ -1,5 +1,13 @@
 
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package com.example.shivamarora.stepsensor.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shivamarora.stepsensor.Others.Constant;
+import com.example.shivamarora.stepsensor.R;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -76,7 +86,7 @@ public class GoogleSigniIn extends AppCompatActivity {
         mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
         mInterstitalAdView.loadAd(new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("5B39BC16E8DC33 87A579AEC32C6BD20D")
+                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
                         .build()
         );
         mInterstitalAdView.setAdListener(new AdListener() {
@@ -296,7 +306,7 @@ public class GoogleSigniIn extends AppCompatActivity {
                 mSweetDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Intent toOne = new Intent(GoogleSigniIn.this, One.class);
+                        Intent toOne = new Intent(GoogleSigniIn.this, Main.class);
                         toOne.putExtra("name", mPersonName);
                         toOne.putExtra("loginstatus" , mCurrentLoginStatus);
                         toOne.putExtra("photo", mPersonPhoto);
@@ -349,7 +359,7 @@ public class GoogleSigniIn extends AppCompatActivity {
                 GoogleSignInResult result = opr.get();
                 handleSignInResult(result);
 
-                Intent toOne = new Intent(GoogleSigniIn.this, One.class);
+                Intent toOne = new Intent(GoogleSigniIn.this, Main.class);
                 toOne.putExtra("name", mPersonName);
                 toOne.putExtra("loginstatus", mCurrentLoginStatus);
                 toOne.putExtra("photo", mPersonPhoto);
@@ -415,7 +425,7 @@ class DoinBackgroundGoogleSignIn extends AsyncTask<Void , Void ,Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
 
-        Intent i = new Intent(googleSigniIn , One.class) ;
+        Intent i = new Intent(googleSigniIn , Main.class) ;
         i.putExtra("loginstatus" , Constant.GOOGLE_PLUS_LOGOUT);
         googleSigniIn.startActivity(i);
         googleSigniIn.finish();

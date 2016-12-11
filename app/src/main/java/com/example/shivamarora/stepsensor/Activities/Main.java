@@ -1,28 +1,24 @@
-package com.example.shivamarora.stepsensor;
+/*
+ * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
 
-import android.annotation.TargetApi;
+package com.example.shivamarora.stepsensor.Activities;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -30,20 +26,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
@@ -51,30 +42,23 @@ import com.amulyakhare.textdrawable.TextDrawable;
 //import com.facebook.FacebookSdk;
 //import com.facebook.appevents.AppEventsLogger;
 import com.bumptech.glide.Glide;
-import com.github.amlcurran.showcaseview.ShowcaseDrawer;
+import com.example.shivamarora.stepsensor.Others.Constant;
+import com.example.shivamarora.stepsensor.Database_Models.DbData;
+import com.example.shivamarora.stepsensor.Database_Models.DbGeneral;
+import com.example.shivamarora.stepsensor.R;
 import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.PointTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.pkmmte.view.CircularImageView;
 import com.skyfishjy.library.RippleBackground;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class One extends AppCompatActivity  implements SensorEventListener  {
+public class Main extends AppCompatActivity  implements SensorEventListener  {
 
     DrawerLayout mDrawerLayout ;
     NavigationView mNavigationView;
@@ -114,17 +98,17 @@ public class One extends AppCompatActivity  implements SensorEventListener  {
     DbGeneral mDbGeneral ;
     ActionBarDrawerToggle actionBarDrawerToggle ;
 
-
-
+    int backPressedCount = 0 ;
 
 
 //NEVER START THIS ACTIVTY WITH INTENT OTTHER THAN GOOGLESINGIN ACTIVITY ............................
 
 
+    @SuppressWarnings("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_one);
+        setContentView(R.layout.activity_main);
 
 
         //Initialising ActiveAndroid DataBase ....................................
@@ -188,7 +172,7 @@ public class One extends AppCompatActivity  implements SensorEventListener  {
 
 
 if(historyAll.size()!=0) {
-    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(One.this, SweetAlertDialog.SUCCESS_TYPE);
+    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(Main.this, SweetAlertDialog.SUCCESS_TYPE);
     sweetAlertDialog.setTitleText("YESTERDAY'S PROGRESS  \n \n ");
     sweetAlertDialog.setContentText("STEP COUNT : " + yesterDayStepCount + "\n \n" + "CALORIES : " + yesterDayCal + " cal \n \n"
             + "DISTANCE  : " + yesterdayDist + " m \n \n");
@@ -223,7 +207,7 @@ if(historyAll.size()!=0) {
         toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         actionBarDrawerToggle = new ActionBarDrawerToggle(One.this , mDrawerLayout , toolbar ,R.string.navigation_drawer_open , R.string.navigation_drawer_close ) ;
+         actionBarDrawerToggle = new ActionBarDrawerToggle(Main.this , mDrawerLayout , toolbar ,R.string.navigation_drawer_open , R.string.navigation_drawer_close ) ;
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
@@ -243,11 +227,11 @@ if(historyAll.size()!=0) {
 
 
                 } else if (item.getItemId() == R.id.graph) {
-                    Intent i = new Intent(One.this, GraphicalAnalysis.class);
+                    Intent i = new Intent(Main.this, GraphicalAnalysis.class);
                     startActivity(i);
 
                 } else if (item.getItemId() == R.id.history) {
-                    Intent i = new Intent(One.this, History.class);
+                    Intent i = new Intent(Main.this, History.class);
                     startActivity(i);
 
                 } else if (item.getItemId() == R.id.notification) {
@@ -275,18 +259,18 @@ if(historyAll.size()!=0) {
 
                     }
 
-                    Intent i = new Intent(One.this, Me.class);
+                    Intent i = new Intent(Main.this, Me.class);
                     i.putExtra("DP", picUrl);
                     i.putExtra("name", name);
                     i.putExtra("loginstatus", currentLoginStatus);
                     i.putExtra("email" , email) ;
                     startActivity(i);
-//                    One.this.finish();
+//                    Main.this.finish();
 
 
                 } else if (item.getItemId() == R.id.setting) {
                     int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
-                    Intent i = new Intent(One.this, Setting_Activity.class);
+                    Intent i = new Intent(Main.this, Setting_Activity.class);
                     i.putExtra("loginstatus", currentLoginStatus);
                     startActivity(i);
 
@@ -307,7 +291,7 @@ if(historyAll.size()!=0) {
 
 
                 } else if (item.getItemId() == R.id.exit) {
-                    One.this.finish();
+                    Main.this.finish();
                 }
 
                 if (item.getItemId() != R.id.gpswalk && item.getItemId() != R.id.notification)
@@ -366,6 +350,21 @@ if(historyAll.size()!=0) {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+            backPressedCount ++ ;
+
+         if(backPressedCount == 1)
+            Toast.makeText(getApplicationContext() , "Press Back Two Times To Exit !! " , Toast.LENGTH_SHORT).show();
+
+        else if(backPressedCount == 2) {
+             super.onBackPressed();
+             Main.this.finish();
+         }
+
+
+    }
 
     @Override
     protected void onPause() {
@@ -375,7 +374,7 @@ if(historyAll.size()!=0) {
 
     void Show_Case_Calling() {
 
-        final ShowcaseView mainShow =  new ShowcaseView.Builder(One.this)
+        final ShowcaseView mainShow =  new ShowcaseView.Builder(Main.this)
                 .blockAllTouches()
                 .setContentTitle("WELCOME TO STEP SENSOR")
                 .setStyle(R.style.CustomShowcaseTheme3)
@@ -384,7 +383,7 @@ if(historyAll.size()!=0) {
                 .build() ;
         mainShow.setButtonText("CONTINUE");
 
-        final ShowcaseView showcaseview1 =  new ShowcaseView.Builder(One.this)
+        final ShowcaseView showcaseview1 =  new ShowcaseView.Builder(Main.this)
                 .setTarget(new ViewTarget(mStepCountDisplay))
                 .blockAllTouches()
                 .setStyle(R.style.CustomShowcaseTheme)
@@ -502,7 +501,7 @@ if(historyAll.size()!=0) {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater menuInflater = new MenuInflater(One.this);
+        MenuInflater menuInflater = new MenuInflater(Main.this);
         menuInflater.inflate(R.menu.action_bar_menu, menu);
 
 
@@ -528,7 +527,7 @@ if(historyAll.size()!=0) {
         else if (item.getItemId() == R.id.Account) {
 
             int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
-            Intent toGoogleSigniIn = new Intent(One.this, GoogleSigniIn.class);
+            Intent toGoogleSigniIn = new Intent(Main.this, GoogleSigniIn.class);
 
             if (currentLoginStatus == Constant.GOOGLE_PLUS_ALREADY_LOGIN || currentLoginStatus == Constant.GOOGLE_PLUS_LOGIN) {
                 toGoogleSigniIn.putExtra("request_LOGIN_LOGOUT", Constant.GOOGLE_PLUS_LOGOUT);
@@ -559,14 +558,14 @@ if(historyAll.size()!=0) {
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
-            Toast.makeText(One.this , item.getTitle() , Toast.LENGTH_SHORT).show();
+            Toast.makeText(Main.this , item.getTitle() , Toast.LENGTH_SHORT).show();
         }
 
 
         //About Us !!!
         else if(item.getItemId() == R.id.Infoing){
 
-            AlertDialog alertDialog = new AlertDialog.Builder(One.this ).create() ;
+            AlertDialog alertDialog = new AlertDialog.Builder(Main.this ).create() ;
             alertDialog.setIcon(R.drawable.ic_launcher);
             alertDialog.setTitle(" STEP SENSOR");
             alertDialog.setMessage("\n\nLight Weight , Easy To Install and Calibrate.\nSTEP SENSOR counts your daily active steps and is battery Efficient \n\n\n  CREATED BY :- \n\n SHIVAM ARORA");
@@ -653,7 +652,7 @@ if(historyAll.size()!=0) {
 
 
                 if (mPlayStopStatus == Constant.CURRENTLY_STOPPED) {
-                    mSensorManager.registerListener(One.this, mStepCounter, mDbGeneral.getDbSenstivity());
+                    mSensorManager.registerListener(Main.this, mStepCounter, mDbGeneral.getDbSenstivity());
                     mCurrentNoOfSteps-- ;
                     mPlayStopStatus = Constant.CURRENTLY_PLAYING;
                     rippleBackground.startRippleAnimation();
@@ -669,7 +668,7 @@ if(historyAll.size()!=0) {
                             mActivetime.setText(endTime/60000 + " :: " + (endTime/1000) %60);
 
                             mPlayStopStatus = Constant.CURRENTLY_STOPPED;
-                            mSensorManager.unregisterListener(One.this, mStepCounter);
+                            mSensorManager.unregisterListener(Main.this, mStepCounter);
                             rippleBackground.stopRippleAnimation();
                             mCurrentDataInDB.setDbStepCount(mCurrentNoOfSteps);
                             long activeTime = mCurrentDataInDB.getDbActiveTimeInMilli() + endTime ;
@@ -695,7 +694,7 @@ if(historyAll.size()!=0) {
                     }
 
                     mPlayStopStatus = Constant.CURRENTLY_STOPPED;
-                    mSensorManager.unregisterListener(One.this, mStepCounter);
+                    mSensorManager.unregisterListener(Main.this, mStepCounter);
                     rippleBackground.stopRippleAnimation();
                     mCurrentDataInDB.setDbStepCount(mCurrentNoOfSteps);
                     long activeTime = mCurrentDataInDB.getDbActiveTimeInMilli() + endTime ;
@@ -716,7 +715,7 @@ if(historyAll.size()!=0) {
                                 mDisplayfonstSize = 200 ;
                             }
 
-                            mSensorManager.registerListener(One.this, mStepCounter, mDbGeneral.getDbSenstivity());
+                            mSensorManager.registerListener(Main.this, mStepCounter, mDbGeneral.getDbSenstivity());
                             mCurrentNoOfSteps--;
                             mPlayStopStatus = Constant.CURRENTLY_PLAYING;
                             rippleBackground.startRippleAnimation();

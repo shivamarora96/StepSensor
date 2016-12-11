@@ -36,32 +36,32 @@
             android:theme="@android:style/Theme.Translucent" />
 
 
-        <activity android:name=".One"
+        <activity android:name=".Activities.Main"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".GetStartedScreen"
+        <activity android:name=".Activities.GetStartedScreen"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".History"
+        <activity android:name=".Activities.History"
             android:screenOrientation="portrait" />
 
 
-        <activity android:name=".Me"
+        <activity android:name=".Activities.Me"
             android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".GraphicalAnalysis"
+        <activity android:name=".Activities.GraphicalAnalysis"
             android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".Setting_Activity"
+        <activity android:name=".Activities.Setting_Activity"
             android:screenOrientation="portrait"/>
 
 
         <activity
             android:screenOrientation="portrait"
-            android:name=".OpeningScreen">
+            android:name=".Activities.OpeningScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +72,7 @@
 
         <activity
             android:screenOrientation="portrait"
-            android:name=".GoogleSigniIn"/>
+            android:name=".Activities.GoogleSigniIn"/>
 
 
     </application>

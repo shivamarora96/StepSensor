@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.example.shivamarora.stepsensor;
+package com.example.shivamarora.stepsensor.Fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.shivamarora.stepsensor.R;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -23,10 +25,10 @@ import java.util.Calendar;
 
 public class CaloriesGraphFragment extends android.support.v4.app.Fragment {
 
-    static String mCaloreisAverage= "0" ;
-    static String  mCaloreisTotal= "0" ;
+    public static String mCaloreisAverage= "0" ;
+    public static String  mCaloreisTotal= "0" ;
      Calendar calen = Calendar.getInstance() ;
-    static ArrayList<Integer> StepCountInaWeek ;
+    public static ArrayList<Integer> StepCountInaWeek ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
