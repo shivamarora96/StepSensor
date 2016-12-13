@@ -49,6 +49,8 @@ import com.example.shivamarora.stepsensor.R;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.PointTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.pkmmte.view.CircularImageView;
 import com.skyfishjy.library.RippleBackground;
 
@@ -67,6 +69,7 @@ public class Main extends AppCompatActivity  implements SensorEventListener  {
 
     CircularImageView mHeaderDP ;
     TextView mHeaderName ;
+    AdView adView ;
 
     int mDisplayfonstSize = 200 ;
 
@@ -113,9 +116,7 @@ public class Main extends AppCompatActivity  implements SensorEventListener  {
 
         //Initialising ActiveAndroid DataBase ....................................
         ActiveAndroid.initialize(this);
-
         List<DbGeneral> dbGeneralList =  new Select().from(DbGeneral.class).execute() ;
-
 
         if(dbGeneralList.size() == 0){
             Log.i("a" , "c") ;
@@ -140,7 +141,9 @@ public class Main extends AppCompatActivity  implements SensorEventListener  {
 
 
         }
+
         Log.i("check" , mDbGeneral.getDbStepGoal() + "");
+
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView)findViewById(R.id.navigaitonVIew);
@@ -351,6 +354,18 @@ if(historyAll.size()!=0) {
     }
 
     @Override
+    protected void onStart() {
+        //Displaying Ads ....
+
+        adView = (AdView)findViewById(R.id.MainScreen_bannerAds) ;
+        adView.loadAd(new AdRequest.Builder()
+                .build()
+        );
+
+        super.onStart();
+    }
+
+    @Override
     public void onBackPressed() {
 
             backPressedCount ++ ;
@@ -392,6 +407,16 @@ if(historyAll.size()!=0) {
                 .hideOnTouchOutside()
                 .build() ;
         showcaseview1.setShowcase(new ViewTarget(mStepCountDisplay) , true);
+
+        final ShowcaseView showcaseviewcurrentSteps =  new ShowcaseView.Builder(Main.this)
+                .setTarget(new ViewTarget(mStepCountDisplay))
+                .blockAllTouches()
+                .setStyle(R.style.CustomShowcaseTheme4)
+                .setContentTitle("RECORD YOUR CURRENT STEPS")
+                .setContentText("\n\n\n DISPLAYS YOUR COUNT OF CURRENT STEPS !! \n \n Move Ahead :->  ")
+                .hideOnTouchOutside()
+                .build() ;
+        showcaseviewcurrentSteps.setShowcase(new ViewTarget(mCurrentStepText) , true);
 
         final ShowcaseView showcase2 =  new ShowcaseView.Builder(this)
                 .setTarget(new PointTarget(new Point(100, 100)))
@@ -436,6 +461,7 @@ if(historyAll.size()!=0) {
         showcase4.hide();
         showcase5.hide();
         showcaseview1.hide();
+        showcaseviewcurrentSteps.hide();
         mainShow.show();
 
 
@@ -487,10 +513,16 @@ if(historyAll.size()!=0) {
             @Override
             public void onClick(View v) {
                 showcase5.hide();
+                showcaseviewcurrentSteps.show();
             }
         });
 
-
+    showcaseviewcurrentSteps.overrideButtonClick(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showcaseviewcurrentSteps.hide();
+        }
+    });
 
 
 
@@ -582,12 +614,16 @@ if(historyAll.size()!=0) {
     }
 
 
-
+    @Override
+    protected void onStop() {
+        adView.destroy();
+        super.onStop();
+    }
 
     @Override
     protected void onResume() {
-        super.onResume();
 
+        super.onResume();
 
 
         if(CheckIsDateChanged(mCalender, mCurrentDataInDB)){

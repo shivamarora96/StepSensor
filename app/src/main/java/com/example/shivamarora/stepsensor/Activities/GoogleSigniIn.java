@@ -74,10 +74,9 @@ public class GoogleSigniIn extends AppCompatActivity {
 //        5B39BC16E8DC3387A579AEC32C6BD20D
         mAdView = (AdView)findViewById(R.id.GoogleSignIn_BannerAdd) ;
         mAdView.loadAd(new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
                         .build()
-
         );
 
 
@@ -85,8 +84,8 @@ public class GoogleSigniIn extends AppCompatActivity {
     mInterstitalAdView = new InterstitialAd(GoogleSigniIn.this);
         mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
         mInterstitalAdView.loadAd(new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
                         .build()
         );
         mInterstitalAdView.setAdListener(new AdListener() {

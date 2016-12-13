@@ -23,6 +23,8 @@ import android.widget.ImageButton;
 import com.bumptech.glide.Glide;
 import com.example.shivamarora.stepsensor.Others.Constant;
 import com.example.shivamarora.stepsensor.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.pkmmte.view.CircularImageView;
 
 public class Me extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class Me extends AppCompatActivity {
     EditText meName;
     EditText meEmail;
     ImageButton gplusButton;
-
+    AdView mAdview ;
 
 
 
@@ -40,6 +42,12 @@ public class Me extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me);
+
+
+        mAdview = (AdView)findViewById(R.id.Me_BannerAdd) ;
+        mAdview.loadAd(new AdRequest.Builder()
+                        .build()
+                );
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.MeToolbar);

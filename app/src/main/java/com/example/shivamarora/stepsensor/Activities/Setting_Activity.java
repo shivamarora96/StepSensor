@@ -12,6 +12,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,9 +30,14 @@ import android.widget.Toast;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.example.shivamarora.stepsensor.Adapters_Customs.Settings_Adapter;
+import com.example.shivamarora.stepsensor.BuildConfig;
 import com.example.shivamarora.stepsensor.Database_Models.DbGeneral;
 import com.example.shivamarora.stepsensor.Others.Constant;
 import com.example.shivamarora.stepsensor.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +52,8 @@ public class Setting_Activity extends AppCompatActivity {
     int stepGoals ;
     int stepSizeIncm ;
     int senstivity ;
+    InterstitialAd mInterstitalAdView ;
+    AdView mBannerAd ;
 
 
     @Override
@@ -322,10 +331,14 @@ public class Setting_Activity extends AppCompatActivity {
                 else if(position == 5){
                     //Version
 
+                   String mVersion = BuildConfig.VERSION_NAME ;
+                    mDbGeneral.setDbVersion(BuildConfig.VERSION_CODE);
+                    mDbGeneral.save();
+
                     AlertDialog alertDialog = new AlertDialog.Builder(Setting_Activity.this ).create() ;
                     alertDialog.setIcon(R.drawable.ic_launcher);
                     alertDialog.setTitle(" STEP SENSOR");
-                    alertDialog.setMessage("\n\n  VERSION :: " + mDbGeneral.getDbVersion());
+                    alertDialog.setMessage("\n\n  VERSION :: " + mVersion);
                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -339,6 +352,35 @@ public class Setting_Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mBannerAd = (AdView)findViewById(R.id.Settings_BannerAdd) ;
+        mBannerAd.loadAd(new AdRequest.Builder()
+                .build()
+        );
+
+
+
+
+        mInterstitalAdView = new InterstitialAd(Setting_Activity.this);
+        mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
+        mInterstitalAdView.loadAd(new AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+                .build()
+        );
+        mInterstitalAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if(mInterstitalAdView.isLoaded())
+                    mInterstitalAdView.show();
+            }
+        });
     }
 
     @Override

@@ -61,20 +61,46 @@
 
         <!--COntent Layout..........................................-->
 
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
             <ExpandableListView
                 android:layout_margin="10dp"
-                app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
                 android:id="@+id/HistoryListView"
                 android:layout_width="match_parent"
                 android:indicatorEnd="?android:attr/expandableListPreferredItemIndicatorRight"
-                android:layout_height="match_parent"
+                android:layout_height="460dp"
                 android:divider="@android:color/white"
                 android:dividerHeight="5dp"/>
 
+            <android.support.v7.widget.CardView
+                android:backgroundTint="@android:color/transparent"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    </android.support.design.widget.CoordinatorLayout>
+
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginTop="2dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/History_BannerAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/bannerAdunitId" />
+
+            </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
 
 
 

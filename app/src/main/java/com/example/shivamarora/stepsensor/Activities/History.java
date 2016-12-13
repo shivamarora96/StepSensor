@@ -23,6 +23,8 @@ import com.example.shivamarora.stepsensor.Others.History_Extras.ChildObject;
 import com.example.shivamarora.stepsensor.Others.History_Extras.GroupObject;
 import com.example.shivamarora.stepsensor.Others.History_Extras.GroupPlusChild;
 import com.example.shivamarora.stepsensor.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +43,11 @@ ArrayList<GroupPlusChild> groupPlusChildArrayList ;
 
         ActiveAndroid.initialize(this);
 
+        AdView adView = (AdView)findViewById(R.id.History_BannerAdd) ;
+        adView.loadAd(new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build()
+                );
 
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.Historytoolbar) ;
