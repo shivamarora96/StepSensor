@@ -26,11 +26,11 @@ public class GetStartedScreen extends AppCompatActivity {
 
         ActiveAndroid.initialize(this);
 
-        if(new Select().from(DbData.class).execute().size() != 0 ){
+//        if(new Select().from(DbData.class).execute().size() != 0 ){
             Intent i = new Intent(this , GoogleSigniIn.class);
             startActivity(i);
             this.finish();
-        }
+//        }
 
 
 getStarted = (Button)findViewById(R.id.OpenScreen_getstartedButton);

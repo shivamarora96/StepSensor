@@ -1,13 +1,4 @@
-
-/*
- * Copyright (c) 2016. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
-package com.example.shivamarora.stepsensor.Activities;
+    package com.example.shivamarora.stepsensor.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -197,6 +188,9 @@ public class GoogleSigniIn extends AppCompatActivity {
     private void signIn() {
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mgoogleApiClient);
+        Log.i("qaz" , "IN SIGNIN :" + mgoogleApiClient.isConnected() + " :: " + signInIntent.getData()) ;
+
+
         startActivityForResult(signInIntent, Constant.GOOGLE_PLUS_SIGNIN_REQUESTCODE);
         GoogleSigniIn.mCurrentLoginStatus = Constant.GOOGLE_PLUS_LOGIN;
 
@@ -262,19 +256,22 @@ public class GoogleSigniIn extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-
+        Log.i("qaz" , " in activity result ") ;
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == Constant.GOOGLE_PLUS_SIGNIN_REQUESTCODE) {
+            Log.i("qaz" , "in activity result ") ;
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
     private void handleSignInResult(GoogleSignInResult result) {
-//        Log.i("Google", "handleSignInResult:" + result.isSuccess());
+        Log.i("qaz", "In Handle Function : " + result.isSuccess());
 
         if(dilogwhileLogin!=null) {
             if (dilogwhileLogin.isShowing())
@@ -349,7 +346,7 @@ public class GoogleSigniIn extends AppCompatActivity {
 
             OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mgoogleApiClient);
             if (opr.isDone()) {
-
+                Log.i("qaz" , " Cached ") ;
                 // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
                 // and the GoogleSignInResult will be available instantly.
 
@@ -373,7 +370,7 @@ public class GoogleSigniIn extends AppCompatActivity {
                 // this asynchronous branch will attempt to sign in the user silently.  Cross-device
                 // single sign-on will occur in this branch.
 //            showProgressDialog();
-
+                Log.i("qaz" , "Not Cached ") ;
                 mCurrentLoginStatus = Constant.GOOGLE_PLUS_LOGOUT;
                 opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                     @Override

@@ -50,7 +50,7 @@ public class Constant {
     public  static final String CAMERA_IMAGE_CONSTANT_FILE_NAME = "Step_Senor_DP";
     public  static final int GALLERY_PICK_PHOTO_CODE = 1046;
     public  static final int CAMERA_IMAGE_WIDTH = 200;
-    public  static final int GOOGLE_PLUS_SIGNIN_REQUESTCODE = 1909;
+    public  static final int GOOGLE_PLUS_SIGNIN_REQUESTCODE = 5936;
 
     public  static final int GOOGLE_PLUS_ALREADY_LOGIN = -56;
     public  static final int GOOGLE_PLUS_LOGIN = 66;
