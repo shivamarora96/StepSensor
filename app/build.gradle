@@ -3,29 +3,12 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'FINAL_GP_STORE'
-            keyPassword 'national'
-            storeFile file('G:/Final_GP_STORE.jks')
-            storePassword 'national'
-        }
-        finalconfig {
-            keyAlias 'finalkey'
+
+        step_sensor_config {
+            keyAlias 'step_sensor_alias'
             keyPassword '123456789'
-            storeFile file('G:/finalfile.jks')
+            storeFile file('F:/step_sensor_keystore.jks')
             storePassword '123456789'
-        }
-        config1 {
-            keyAlias 'FinalGGp'
-            keyPassword 'national'
-            storeFile file('G:/Final_GP_STORE.jks')
-            storePassword 'national'
-        }
-        versionONE {
-            keyAlias 'versionONE'
-            keyPassword 'national'
-            storeFile file('G:/versionONE')
-            storePassword 'national'
         }
     }
     compileSdkVersion 23
@@ -36,24 +19,23 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        signingConfig signingConfigs.versionONE
+        signingConfig signingConfigs.step_sensor_config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.versionONE
+            signingConfig signingConfigs.step_sensor_config
+            debuggable false
+        }
+        debug {
+            signingConfig signingConfigs.step_sensor_config
         }
     }
     productFlavors {
     }
 }
 
-//
-////Facebook Integration
-//repositories {
-//    mavenCentral()
-//}
 repositories {
     jcenter()
 }
