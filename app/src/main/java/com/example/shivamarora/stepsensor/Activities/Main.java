@@ -689,7 +689,7 @@ if(historyAll.size()!=0) {
 
                 if (mPlayStopStatus == Constant.CURRENTLY_STOPPED) {
                     mSensorManager.registerListener(Main.this, mStepCounter, mDbGeneral.getDbSenstivity());
-                    mCurrentNoOfSteps-- ;
+                    mCurrentNoOfSteps = mCurrentNoOfSteps - 3 ;
                     mPlayStopStatus = Constant.CURRENTLY_PLAYING;
                     rippleBackground.startRippleAnimation();
 

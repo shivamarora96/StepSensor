@@ -1,33 +1,35 @@
 {
   "project_info": {
-    "project_number": "77647509297",
-    "project_id": "stepsensor"
+    "project_number": "258475396802",
+    "firebase_url": "https://step-sensor-f.firebaseio.com",
+    "project_id": "step-sensor-f",
+    "storage_bucket": "step-sensor-f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77647509297:android:9948e3534f1c959e",
+        "mobilesdk_app_id": "1:258475396802:android:9948e3534f1c959e",
         "android_client_info": {
           "package_name": "com.example.shivamarora.stepsensor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "77647509297-qpn5uvjf0unjtk46d5a0bkrjtcmji8q2.apps.googleusercontent.com",
+          "client_id": "258475396802-p9qugep8k7vui72fbet9u0v5r1f4la4n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.shivamarora.stepsensor",
-            "certificate_hash": "ACDC57F8122BD241342D7C00C601A022E968E5D6"
+            "certificate_hash": "D80392215515070791D2834BE5E15C298C7A4A1E"
           }
         },
         {
-          "client_id": "77647509297-p81o455noi1023ba7f94sb0mv7ledsao.apps.googleusercontent.com",
+          "client_id": "258475396802-pjdoi9beajfnknfgm1i8l8pvbj86mamq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC4tOvEo_dqLMvh6ZQddjfUjs4ETHPEHxk"
+          "current_key": "AIzaSyBPZj9CWAHIIVkJVCRpuaoTaBfXeQsxB94"
         }
       ],
       "services": {
@@ -35,11 +37,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258475396802-pjdoi9beajfnknfgm1i8l8pvbj86mamq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

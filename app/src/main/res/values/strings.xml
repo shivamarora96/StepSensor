@@ -6,9 +6,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
-    <string name="facebook_app_id">199658273803724</string>
-    <string name="fb_login_protocol_scheme">fb199658273803724</string>
-
+    <string name="facebook_app_id">201240953674163</string>
+    <string name="fb_login_protocol_scheme">fb201240953674163</string>
 
 
     <!-- ADMOB-->

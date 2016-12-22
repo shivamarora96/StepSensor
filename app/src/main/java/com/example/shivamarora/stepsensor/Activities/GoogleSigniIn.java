@@ -1,10 +1,11 @@
-    package com.example.shivamarora.stepsensor.Activities;
+package com.example.shivamarora.stepsensor.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -36,8 +44,11 @@ public class GoogleSigniIn extends AppCompatActivity {
 
     private AdView mAdView;
     private InterstitialAd mInterstitalAdView ;
+
     TextView skipNow ;
+
     ProgressDialog mprogressDialog ;
+
     SweetAlertDialog dilogwhileLogin ;
     SweetAlertDialog mSweetDialog ;
     SweetAlertDialog sweetAlertDialoglogout ;
@@ -50,6 +61,7 @@ public class GoogleSigniIn extends AppCompatActivity {
     String mPersonName = null ;
     String mPersonPhoto  = null;
     String mPersonEmail = null ;
+
     static  int mCurrentLoginStatus = Constant.GOOGLE_PLUS_LOGOUT ;
 
 
@@ -60,39 +72,12 @@ public class GoogleSigniIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_signi_in);
 
-
-//TestID
-//        5B39BC16E8DC3387A579AEC32C6BD20D
-        mAdView = (AdView)findViewById(R.id.GoogleSignIn_BannerAdd) ;
-        mAdView.loadAd(new AdRequest.Builder()
-//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
-                        .build()
-        );
-
-
-
-    mInterstitalAdView = new InterstitialAd(GoogleSigniIn.this);
-        mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
-        mInterstitalAdView.loadAd(new AdRequest.Builder()
-//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
-                        .build()
-        );
-        mInterstitalAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if(mInterstitalAdView.isLoaded())
-                    mInterstitalAdView.show();
-            }
-        });
-
+        Show_ADs();
 
         requestCode =  getIntent().getIntExtra("request_LOGIN_LOGOUT" , Constant.GOOGLE_PLUS_LOGIN) ;
 
-
-       // Configure sign-in to request the user's ID, email address, and basic
-       // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+         // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                .requestEmail()
                .requestProfile()
@@ -108,11 +93,12 @@ public class GoogleSigniIn extends AppCompatActivity {
 
                        Toast.makeText(GoogleSigniIn.this , "Connection Failed , Try after sometimes :(" , Toast.LENGTH_LONG).show();
                    }
+
                })
                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                .build();
 
-
+//        mgoogleApiClient.connect();
 //Customize SignInButton .........................
 
 
@@ -166,7 +152,32 @@ public class GoogleSigniIn extends AppCompatActivity {
 
     }
 
+    private void Show_ADs() {
+        //TestID
+//        5B39BC16E8DC3387A579AEC32C6BD20D
+        mAdView = (AdView)findViewById(R.id.GoogleSignIn_BannerAdd) ;
+        mAdView.loadAd(new AdRequest.Builder()
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+                        .build()
+        );
 
+
+        mInterstitalAdView = new InterstitialAd(GoogleSigniIn.this);
+        mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
+        mInterstitalAdView.loadAd(new AdRequest.Builder()
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+                        .build()
+        );
+        mInterstitalAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if(mInterstitalAdView.isLoaded())
+                    mInterstitalAdView.show();
+            }
+        });
+    }
 
 
     protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
@@ -188,6 +199,7 @@ public class GoogleSigniIn extends AppCompatActivity {
     private void signIn() {
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mgoogleApiClient);
+
         Log.i("qaz" , "IN SIGNIN :" + mgoogleApiClient.isConnected() + " :: " + signInIntent.getData()) ;
 
 
@@ -279,6 +291,7 @@ public class GoogleSigniIn extends AppCompatActivity {
         }
 
 
+//        signIn();
 
 
         if (result.isSuccess()) {
@@ -433,9 +446,5 @@ class DoinBackgroundGoogleSignIn extends AsyncTask<Void , Void ,Void>{
 
         super.onPostExecute(aVoid);
     }
-
-
-
-
 
 }
