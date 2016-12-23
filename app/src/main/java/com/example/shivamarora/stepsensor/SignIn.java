@@ -2,21 +2,27 @@
 package com.example.shivamarora.stepsensor;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shivamarora.stepsensor.Activities.GoogleSigniIn;
 import com.example.shivamarora.stepsensor.Activities.Main;
 import com.example.shivamarora.stepsensor.Others.Constant;
 import com.facebook.AccessToken;
@@ -26,6 +32,10 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -45,20 +55,26 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateListener {
 
 
     SignInButton Login_Button ;
+    AdView mAdView;
+    InterstitialAd mInterstitalAdView ;
+    TextView skipNow ;
     GoogleSignInOptions gso ;
     GoogleApiClient googleApiClient ;
     FirebaseAuth mAuth  ;
-    SignInButton googleSignIn ;
+    Button GooglePlus_Button;
     LoginButton facebookSignIn ;
     CallbackManager callbackManager_facebook;
-
+     SweetAlertDialog mDialog_WhileLogin ;
     final  String TAG = "LOG_TAG" ;
     int requestCode ;
     static  int mCurrentLoginStatus = Constant.GOOGLE_PLUS_LOGOUT ;
+
 
 
     @Override
@@ -69,15 +85,57 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
         Log.i(TAG , "IN ON_CREATE");
 
         requestCode =  getIntent().getIntExtra("request_LOGIN_LOGOUT" , Constant.GOOGLE_PLUS_LOGIN) ;
-
+        Show_ADs();
 
         callbackManager_facebook = CallbackManager.Factory.create();
         Login_Button = (SignInButton)findViewById(R.id.GoogleSignIn_Button) ;
         mAuth = FirebaseAuth.getInstance() ;
+
         set_GoogleApiClient_And_GSO();
         mAuth.addAuthStateListener(this);
+//        mDialog_WhileLogin = new SweetAlertDialog(SignIn.this , SweetAlertDialog.PROGRESS_TYPE) ;
+
+        skipNow = (TextView)findViewById(R.id.GoogleSignIn_SkipForNow);
+        skipNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackGroundTask backGroundTask = new BackGroundTask(SignIn.this) ;
+                backGroundTask.execute();
+            }
+        });
 
     }
+
+
+    //ShowAds.......................................
+    private void Show_ADs() {
+        //TestID
+//        5B39BC16E8DC3387A579AEC32C6BD20D
+        mAdView = (AdView)findViewById(R.id.GoogleSignIn_BannerAdd) ;
+        mAdView.loadAd(new AdRequest.Builder()
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+                        .build()
+        );
+
+
+        mInterstitalAdView = new InterstitialAd(SignIn.this);
+        mInterstitalAdView.setAdUnitId(getString(R.string.InterstetialAdunitId));
+        mInterstitalAdView.loadAd(new AdRequest.Builder()
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("5B39BC16E8DC3387A579AEC32C6BD20D")
+                        .build()
+        );
+        mInterstitalAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if(mInterstitalAdView.isLoaded())
+                    mInterstitalAdView.show();
+            }
+        });
+    }
+
+
 
     //Setting up gso and google_api_client ...............................................................................................
 
@@ -106,34 +164,28 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
         super.onStart();
         Log.i(TAG , "IN ON_START");
 
-        if (requestCode == Constant.GOOGLE_PLUS_LOGIN && mCurrentLoginStatus == Constant.GOOGLE_PLUS_LOGOUT) {
+        final Dialog d = new Dialog(SignIn.this);
+        d.setContentView(R.layout.custom_login_dialogue_chooser);
+        d.setTitle("Connect With Us :: ");
+        facebookSignIn = (LoginButton) d.findViewById(R.id.Facebook_login_button);
+        GooglePlus_Button = (Button) d.findViewById(R.id.Google_Login_Button);
+        GooglePlus_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                    Log.i("abcd" , "clicked yo yo !!!");
+                Call_GooglePlus_SignIn();
+            }
+        });
 
-            Login_Button.setOnClickListener(new View.OnClickListener() {
+        Login_Button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
-                    final Dialog d = new Dialog(SignIn.this);
-                    d.setContentView(R.layout.custom_login_dialogue_chooser);
-                    d.setTitle("Connect With Us :: ");
                     d.show();
-                    View customView = LayoutInflater.from(SignIn.this).inflate(R.layout.custom_login_dialogue_chooser, null);
-                    facebookSignIn = (LoginButton) customView.findViewById(R.id.Facebook_login_button);
-                    googleSignIn = (SignInButton) customView.findViewById(R.id.Google_Login_Button);
-
                     Call_Facebook_Registerion_SignIn();
-
-                    googleSignIn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Call_GooglePlus_SignIn();
-                        }
-                    });
-
                 }
             });
 
-        }
 
     }
 
@@ -148,6 +200,12 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
             facebookSignIn.registerCallback(callbackManager_facebook, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
+                    mDialog_WhileLogin = new SweetAlertDialog(SignIn.this , SweetAlertDialog.PROGRESS_TYPE) ;
+                    mDialog_WhileLogin.setTitleText("Loading ");
+                    mDialog_WhileLogin.getProgressHelper().setBarColor(Color.parseColor("#FF1414"));
+                    mDialog_WhileLogin.setCancelable(false);
+                    mDialog_WhileLogin.show();
+
                     handle_Facebook_SignIn(loginResult);
                     Log.i(TAG , "SUCCESS");
                 }
@@ -178,6 +236,19 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
     //Calling GOogle Plus SignIn...................................................................
 
     void Call_GooglePlus_SignIn(){
+
+//        dilogwhileLogin = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+//        dilogwhileLogin.getProgressHelper().setBarColor(Color.parseColor("#FF1414"));
+//        dilogwhileLogin.setTitleText("Loading");
+//        dilogwhileLogin.setCancelable(false);
+//        dilogwhileLogin.show();
+
+        mDialog_WhileLogin = new SweetAlertDialog(SignIn.this , SweetAlertDialog.PROGRESS_TYPE) ;
+        mDialog_WhileLogin.setTitleText("Loading ");
+        mDialog_WhileLogin.getProgressHelper().setBarColor(Color.parseColor("#FF1414"));
+        mDialog_WhileLogin.setCancelable(false);
+        mDialog_WhileLogin.show();
+
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent , 25);
         Log.i(TAG , "IN Call_GooglePlus_SignIn()") ;
@@ -186,6 +257,7 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
 
     private void handle_Facebook_SignIn(LoginResult loginResult) {
         Log.i(TAG , "IN handle_Facebook_SignIn ") ;
+
         AccessToken fbAccessToken = loginResult.getAccessToken() ;
         AuthCredential authCredential = FacebookAuthProvider.getCredential(fbAccessToken.getToken()) ;
         mAuth.signInWithCredential(authCredential)
@@ -276,24 +348,58 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
         Log.i(TAG , "AuthListner") ;
-        FirebaseUser user = firebaseAuth.getCurrentUser() ;
+        final FirebaseUser user = firebaseAuth.getCurrentUser() ;
         if(user!=null) {
 
             Log.i(TAG , "AuthListner +  Not Null User") ;
-
             String currentName = user.getDisplayName();
             Toast.makeText(SignIn.this, "User - > " + currentName, Toast.LENGTH_LONG).show();
-            mCurrentLoginStatus = Constant.GOOGLE_PLUS_ALREADY_LOGIN ;
+//            mCurrentLoginStatus = Constant.GOOGLE_PLUS_ALREADY_LOGIN ;
+            if(mDialog_WhileLogin!=null && mDialog_WhileLogin.isShowing()){
 
-            //TODO ADD INTENT ..........................
-            Intent to_Main = new Intent(SignIn.this, Main.class);
-            to_Main.putExtra("name", currentName);
-            to_Main.putExtra("loginstatus", mCurrentLoginStatus);
-            to_Main.putExtra("photo", user.getPhotoUrl()+"");
-            to_Main.putExtra("email", user.getEmail());
-            startActivity(to_Main);
-            finis
+                mCurrentLoginStatus = Constant.GOOGLE_PLUS_LOGIN;
+                mDialog_WhileLogin.dismiss();
 
+                SweetAlertDialog  sweetAlertDialog_Login = new SweetAlertDialog(SignIn.this, SweetAlertDialog.SUCCESS_TYPE);
+                sweetAlertDialog_Login.setTitleText("SUCCESSFULL");
+                sweetAlertDialog_Login.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        Intent to_Main = new Intent(SignIn.this, Main.class);
+                        to_Main.putExtra("name", user.getDisplayName());
+                        to_Main.putExtra("loginstatus", mCurrentLoginStatus);
+                        to_Main.putExtra("photo", user.getPhotoUrl() + "");
+                        to_Main.putExtra("email", user.getEmail() + " ");
+                        startActivity(to_Main);
+                        finish();
+                    }
+                });
+                sweetAlertDialog_Login.show();
+
+
+            }
+
+            else if(mDialog_WhileLogin == null ) {
+
+                mCurrentLoginStatus = Constant.GOOGLE_PLUS_ALREADY_LOGIN;
+
+                mDialog_WhileLogin = new SweetAlertDialog(SignIn.this , SweetAlertDialog.PROGRESS_TYPE);
+                mDialog_WhileLogin.setTitleText("Loading");
+                mDialog_WhileLogin.setCancelable(false);
+                mDialog_WhileLogin.getProgressHelper().setBarColor(Color.parseColor("#ff1414"));
+                mDialog_WhileLogin.show();
+
+                Intent to_Main = new Intent(SignIn.this, Main.class);
+                to_Main.putExtra("name", currentName);
+                to_Main.putExtra("loginstatus", mCurrentLoginStatus);
+                to_Main.putExtra("photo", user.getPhotoUrl() + "");
+                to_Main.putExtra("email", user.getEmail());
+                startActivity(to_Main);
+                mDialog_WhileLogin.dismiss();
+                finish();
+
+            }
             Log.i(TAG,"PERSON - > " + currentName + " : " + user.getPhotoUrl()+" : " +  user.getEmail() ) ;
 
 
@@ -324,9 +430,41 @@ public class SignIn extends AppCompatActivity implements FirebaseAuth.AuthStateL
 
 class BackGroundTask extends AsyncTask<Void , Void , Void>{
 
+    SweetAlertDialog sweetAlertDialog ;
+    SignIn signIn ;
+
+    public BackGroundTask(SignIn signIn) {
+        this.signIn = signIn;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        sweetAlertDialog= new SweetAlertDialog(signIn , SweetAlertDialog.PROGRESS_TYPE) ;
+        sweetAlertDialog.setTitleText("Just a second !") ;
+        sweetAlertDialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Intent i = new Intent(signIn , Main.class) ;
+        i.putExtra("loginstatus" , Constant.GOOGLE_PLUS_LOGOUT);
+        signIn.startActivity(i);
+        sweetAlertDialog.dismiss();
+        signIn.finish();
+    }
 
     @Override
     protected Void doInBackground(Void... params) {
+
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         return null;
     }
 }
