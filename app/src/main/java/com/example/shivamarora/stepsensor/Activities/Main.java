@@ -21,6 +21,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,11 +47,13 @@ import com.example.shivamarora.stepsensor.Others.Constant;
 import com.example.shivamarora.stepsensor.Database_Models.DbData;
 import com.example.shivamarora.stepsensor.Database_Models.DbGeneral;
 import com.example.shivamarora.stepsensor.R;
+import com.example.shivamarora.stepsensor.SignIn;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.PointTarget;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pkmmte.view.CircularImageView;
 import com.skyfishjy.library.RippleBackground;
 
@@ -253,7 +256,7 @@ if(historyAll.size()!=0) {
                     int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
                     String picUrl = "";
                     String name = "";
-                    String email = "" ;
+                    String email = " " ;
 
                     if (currentLoginStatus == Constant.GOOGLE_PLUS_ALREADY_LOGIN || currentLoginStatus == Constant.GOOGLE_PLUS_LOGIN) {
                         picUrl = getIntent().getStringExtra("photo");
@@ -266,7 +269,7 @@ if(historyAll.size()!=0) {
                     i.putExtra("DP", picUrl);
                     i.putExtra("name", name);
                     i.putExtra("loginstatus", currentLoginStatus);
-                    i.putExtra("email" , email) ;
+                    i.putExtra("email" , email + " ") ;
                     startActivity(i);
 //                    Main.this.finish();
 
@@ -535,8 +538,11 @@ if(historyAll.size()!=0) {
 
         MenuInflater menuInflater = new MenuInflater(Main.this);
         menuInflater.inflate(R.menu.action_bar_menu, menu);
-
-
+        int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
+        if (currentLoginStatus == Constant.GOOGLE_PLUS_LOGOUT) {
+            MenuItem logoutItem = menu.findItem(R.id.logout);
+            logoutItem.setEnabled(false);
+        }
         return true ;
     }
 
@@ -559,16 +565,50 @@ if(historyAll.size()!=0) {
         else if (item.getItemId() == R.id.Account) {
 
             int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
-            Intent toGoogleSigniIn = new Intent(Main.this, GoogleSigniIn.class);
-
             if (currentLoginStatus == Constant.GOOGLE_PLUS_ALREADY_LOGIN || currentLoginStatus == Constant.GOOGLE_PLUS_LOGIN) {
-                toGoogleSigniIn.putExtra("request_LOGIN_LOGOUT", Constant.GOOGLE_PLUS_LOGOUT);
-                startActivity(toGoogleSigniIn);
-                finish();
+
+                final AlertDialog aDialog = new AlertDialog.Builder(Main.this)
+                        .setIcon(R.drawable.ic_launcher)
+                        .setTitle("WANNA SIGN OUT !! ")
+                        .setMessage("Do You Wish To Logout ?")
+                        .setPositiveButton("Logout Now", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                FirebaseAuth.getInstance().signOut();
+                                dialog.dismiss();
+
+                                final SweetAlertDialog  sweetAlert = new SweetAlertDialog(Main.this, SweetAlertDialog.SUCCESS_TYPE);
+                                sweetAlert.setTitleText("SUCCESSFULL");
+                                sweetAlert.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                        Intent toSignIn = new Intent(Main.this , SignIn.class);
+                                        toSignIn.putExtra("request_LOGIN_LOGOUT" , Constant.GOOGLE_PLUS_LOGIN) ;
+                                        startActivity(toSignIn);
+                                        mCurrentDataInDB.save();
+                                        sweetAlert.dismiss();
+                                        finish();
+                                    }
+                                });
+                                sweetAlert.show();
+
+                            }})
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                             dialog.cancel();
+                            }
+                        })
+                        .create();
+                        aDialog.show();
+
             } else if (currentLoginStatus == Constant.GOOGLE_PLUS_LOGOUT) {
 
-                toGoogleSigniIn.putExtra("request_LOGIN_LOGOUT", Constant.GOOGLE_PLUS_LOGIN);
-                startActivity(toGoogleSigniIn);
+                Intent toSignIn = new Intent(Main.this , SignIn.class);
+                toSignIn.putExtra("request_LOGIN_LOGOUT" , Constant.GOOGLE_PLUS_LOGIN) ;
+                startActivity(toSignIn);
                 finish();
 
 
@@ -577,6 +617,50 @@ if(historyAll.size()!=0) {
 
         }
 
+        else if(item.getItemId() == R.id.logout){
+            int currentLoginStatus = getIntent().getIntExtra("loginstatus", 0);
+            if (currentLoginStatus == Constant.GOOGLE_PLUS_ALREADY_LOGIN || currentLoginStatus == Constant.GOOGLE_PLUS_LOGIN) {
+
+                item.setEnabled(true) ;
+                final AlertDialog aDialog = new AlertDialog.Builder(Main.this)
+                        .setIcon(R.drawable.ic_launcher)
+                        .setTitle("WANNA SIGN OUT !! ")
+                        .setMessage("Do You Wish To Logout ?")
+                        .setPositiveButton("Logout Now", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                FirebaseAuth.getInstance().signOut();
+                                dialog.dismiss();
+
+                                final SweetAlertDialog  sweetAlert = new SweetAlertDialog(Main.this, SweetAlertDialog.SUCCESS_TYPE);
+                                sweetAlert.setTitleText("SUCCESSFULL");
+                                sweetAlert.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                        Intent toSignIn = new Intent(Main.this , SignIn.class);
+                                        toSignIn.putExtra("request_LOGIN_LOGOUT" , Constant.GOOGLE_PLUS_LOGIN) ;
+                                        startActivity(toSignIn);
+                                        mCurrentDataInDB.save();
+                                        sweetAlert.dismiss();
+                                        finish();
+                                    }
+                                });
+                                sweetAlert.show();
+
+                            }})
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create();
+                aDialog.show();
+            }
+
+            }
 
 
         //Sharing ....
@@ -752,7 +836,7 @@ if(historyAll.size()!=0) {
                             }
 
                             mSensorManager.registerListener(Main.this, mStepCounter, mDbGeneral.getDbSenstivity());
-                            mCurrentNoOfSteps--;
+                            mCurrentNoOfSteps = mCurrentNoOfSteps - 3  ;
                             mPlayStopStatus = Constant.CURRENTLY_PLAYING;
                             rippleBackground.startRippleAnimation();
                             startTime = System.currentTimeMillis();
@@ -889,9 +973,5 @@ if(historyAll.size()!=0) {
         mCurrentDataInDB.save() ;
 
     }
-
-
-
-
 }
 

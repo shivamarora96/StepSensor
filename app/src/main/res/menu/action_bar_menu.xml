@@ -7,7 +7,7 @@
 
         <item
         android:id="@+id/Account"
-        android:title="G+ Account"
+        android:title=" Account"
         android:icon="@drawable/iconperson"
         android:showAsAction="never"
         />
@@ -37,7 +37,11 @@
             android:icon="@android:drawable/ic_menu_info_details" />
 
 
-
+        <item android:id="@+id/logout"
+            android:title="Sign Out"
+            android:showAsAction="never"
+            android:icon="@android:drawable/ic_menu_revert"
+            />
 
     </group>
 
